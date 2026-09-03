@@ -1,5 +1,5 @@
 """
-Alpaca CLI — command-line tools for the Options Alpha Agent.
+TEDA CLI — Alpaca command-line tools for the TEDA trading agent.
 
 Mirrors the Alpaca CLI functionality while integrating with the SMV
 strategy engine. Satisfies the hackathon's "Alpaca CLI" requirement.
@@ -41,7 +41,7 @@ from .commands import (
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="python -m cli",
-        description="Alpaca CLI — Options Alpha Agent · Hackathon lablab.ai × Alpaca",
+        description="TEDA CLI — Alpaca trading tools · Hackathon lablab.ai × Alpaca",
     )
     sub = parser.add_subparsers(dest="command", help="commande")
 

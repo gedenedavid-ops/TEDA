@@ -1,5 +1,5 @@
 """
-Autonomous agent loop.
+TEDA — Autonomous trading agent loop (SMV strategy).
 
 For each symbol in the watchlist:
   1. Fetch HTF (1D) and LTF (1H) bars from Alpaca.
@@ -255,7 +255,7 @@ def _auto_loop(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="SMV options alpha agent")
+    parser = argparse.ArgumentParser(description="TEDA — SMV options alpha agent")
     parser.add_argument(
         "--live", action="store_true", help="placer de vrais ordres paper"
     )

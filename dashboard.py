@@ -1,5 +1,5 @@
 """
-Dashboard Streamlit — Options Alpha Agent (SMV × Alpaca × Featherless)
+Dashboard Streamlit — TEDA (SMV × Alpaca × Featherless)
 
 Lancement :
     streamlit run dashboard.py
@@ -25,7 +25,7 @@ import streamlit as st
 
 # Page config — must be the first st call.
 st.set_page_config(
-    page_title="Options Alpha Agent",
+    page_title="TEDA — Trading Agent",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -297,7 +297,7 @@ def load_trade_log(n: int = 20) -> str:
 def render_sidebar() -> None:
     """Sidebar: account + market status + controls."""
     with st.sidebar:
-        st.title("📊 Options Alpha Agent")
+        st.title("📊 TEDA — Trading Agent")
         st.caption("SMV × Alpaca × Featherless")
 
         st.divider()
@@ -552,7 +552,7 @@ def render_strategy() -> None:
 
 
 def main() -> None:
-    st.title("🤖 Options Alpha Agent")
+    st.title("🤖 TEDA")
     st.caption("Agent de trading autonome — Hackathon lablab.ai × Alpaca • Septembre 2026")
 
     # Sidebar

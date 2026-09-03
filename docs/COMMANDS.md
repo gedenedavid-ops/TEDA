@@ -1,4 +1,4 @@
-# Guide d'utilisation — Agent SMV
+# TEDA — Guide d'utilisation
 
 > Manuel rapide : toutes les commandes, ce qu'elles font, et comment lire
 > les résultats. Mis à jour le 2 septembre 2026.

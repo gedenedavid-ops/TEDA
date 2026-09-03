@@ -1,4 +1,4 @@
-# Architecture technique
+# TEDA — Architecture technique
 
 ## Vue d'ensemble
 

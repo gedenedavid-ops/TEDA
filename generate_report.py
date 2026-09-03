@@ -18,7 +18,7 @@ class Report(FPDF):
         if self.page_no() > 1:
             self.set_font("Arial", "I", 8)
             self.set_text_color(120, 120, 120)
-            self.cell(0, 5, "Options Alpha Agents — Rapport Hackathon", align="L")
+            self.cell(0, 5, "TEDA — Rapport Hackathon", align="L")
             self.cell(0, 5, f"Page {self.page_no()}", align="R", new_x="LMARGIN", new_y="NEXT")
             self.line(self.l_margin, self.get_y(), self.w - self.r_margin, self.get_y())
             self.ln(3)
@@ -85,7 +85,7 @@ def build_report():
     pdf.ln(30)
     pdf.set_font("Arial", "B", 28)
     pdf.set_text_color(20, 60, 120)
-    pdf.cell(0, 12, "OPTIONS ALPHA AGENTS", align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 12, "TEDA", align="C", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("Arial", "", 14)
     pdf.set_text_color(80, 80, 80)
     pdf.cell(0, 8, "Hackathon lablab.ai x Alpaca", align="C", new_x="LMARGIN", new_y="NEXT")
@@ -109,8 +109,8 @@ def build_report():
     pdf.section_line()
     pdf.body(
         "Ce rapport presente l'ensemble des travaux realises le 31 aout 2026 "
-        "dans le cadre du hackathon Options Alpha Agents. L'objectif est de "
-        "construire un agent de trading autonome utilisant l'API Alpaca, le "
+        "dans le cadre du hackathon lablab.ai x Alpaca. L'objectif est de "
+        "construire un agent de trading autonome (TEDA) utilisant l'API Alpaca, le "
         "CLI Alpaca, et un LLM open-source via Featherless AI pour generer du "
         "P&L en paper trading avec des options."
     )

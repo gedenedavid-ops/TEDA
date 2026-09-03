@@ -1,7 +1,7 @@
-# Stratégie SMV (Smart Money Vision)
+# TEDA — Stratégie SMV (Smart Money Vision)
 
-> Adaptation au marché actions/options de la stratégie SMC du trader
-> (source : PDF "ULTRA BOOK FX 2", 44 pages).
+> Adaptation au marché actions/options de la stratégie SMC du trader.
+> Stratégie basée sur les concepts de Smart Money (Wyckoff, ICT, SMC).
 
 ## Les 4 piliers
 

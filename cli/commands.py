@@ -1,5 +1,5 @@
 """
-CLI commands — each function implements one CLI subcommand.
+TEDA CLI commands — each function implements one Alpaca CLI subcommand.
 
 All commands use the shared BrokerClient + SMV strategy engine.
 """
@@ -182,7 +182,7 @@ def cmd_status() -> None:
     acc = broker.get_account()
 
     print("=" * 50)
-    print("  📈 Options Alpha Agent — Status")
+    print("  📈 TEDA · Status")
     print("=" * 50)
 
     if market_open:

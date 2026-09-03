@@ -1,8 +1,10 @@
-# Journal des décisions — Options Alpha Agents
+# TEDA — Journal des décisions
 
 > Document vivant : chaque décision technique ou stratégique est datée et
 > consignée ici, avec la raison derrière le choix. C'est la source de vérité
 > pour la one-page write-up de la soumission finale.
+>
+> **Projet** : TEDA (Trading Agent) — Hackathon lablab.ai × Alpaca, Septembre 2026
 
 ---
 
@@ -149,12 +151,13 @@
   le P&L sans avoir à se connecter au terminal.
 
 ### D17 — Déploiement Render/Koyeb
-- **Décision** : déploiement sur Render (tier gratuit) via `render.yaml`
-  ou `Procfile`. Variables d'environnement : `ALPACA_API_KEY`,
+- **Décision** : déploiement sur Koyeb (tier gratuit eMicro, uptime continu) via `Procfile`.
+  Variables d'environnement : `ALPACA_API_KEY`,
   `ALPACA_SECRET_KEY`, `FEATHERLESS_API_KEY`.
 - **Raison** : hébergement 24/7 pour que l'agent et le dashboard soient
-  accessibles en continu. Le trader peut voir les signaux depuis son
-  téléphone.
+  accessibles en continu. Koyeb a été choisi car le tier gratuit ne spin-down
+  pas (contrairement à Render), donc pas besoin de cron job de ping.
+  Déploiement auto depuis GitHub.
 
 ### D18 — Premier trade multi-actifs (3 positions)
 - **Résultat** : le 3/9 entre 14h23 et 15h04 UTC, 3 trades exécutés :

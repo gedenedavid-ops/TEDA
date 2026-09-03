@@ -37,5 +37,18 @@
     ],
     "opened_at": "2026-09-03T15:04:42.738538+00:00",
     "closed": false
+  },
+  {
+    "order_id": "1a1f6970-2220-41a7-a451-937a0695cde2",
+    "symbol": "NVDA",
+    "signal": "BUY",
+    "stop_loss": 225.284,
+    "take_profit": 241.41200000000015,
+    "legs": [
+      "NVDA260911C00227500",
+      "NVDA260911C00242500"
+    ],
+    "opened_at": "2026-09-03T18:01:33.988697+00:00",
+    "closed": false
   }
 ]
