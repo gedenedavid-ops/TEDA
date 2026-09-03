@@ -102,6 +102,13 @@ def run(watchlist: List[str], live: bool = False, use_llm: bool = True) -> None:
 
     if not market_open:
         print(closed_message())
+        # ---- Daily summary at market close ----
+        from agent.reporter import should_generate_summary, generate_daily_summary
+        if should_generate_summary():
+            print("\n📝 Génération du rapport quotidien...")
+            path = generate_daily_summary()
+            if path:
+                print(f"✅ Rapport sauvegardé : {path}")
         if live:
             return  # jamais d'ordres live marché fermé
         print("  (dry-run autorisé — données figées sur la dernière clôture)\n")

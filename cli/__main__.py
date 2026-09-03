@@ -9,6 +9,7 @@ Usage:
     python -m cli positions             # list open positions
     python -m cli orders                # recent orders (last 10)
     python -m cli watchlist             # scan all 10 assets (SMV analysis)
+    python -m cli report                # generate daily trader-style summary
     python -m cli trade SYM ACTION      # manual trade (BUY/SELL)
     python -m cli agent start           # start autonomous agent loop
     python -m cli agent stop --signal   # stop a running agent via signal file
@@ -32,6 +33,7 @@ from .commands import (
     cmd_watchlist,
     cmd_status,
     cmd_export,
+    cmd_report,
     cmd_agent_start,
     cmd_agent_stop,
     cmd_trade,
@@ -59,6 +61,9 @@ def main() -> None:
 
     # status
     sub.add_parser("status", help="horloge marché + résumé compte")
+
+    # report
+    sub.add_parser("report", help="générer le rapport quotidien (bilan de journée)")
 
     # export
     sub.add_parser("export", help="exporter la watchlist en CSV")
@@ -88,6 +93,7 @@ def main() -> None:
         "watchlist": cmd_watchlist,
         "status": cmd_status,
         "export": cmd_export,
+        "report": cmd_report,
         "trade": lambda: cmd_trade(args.symbol, args.action),
         "agent": lambda: _handle_agent(args),
     }

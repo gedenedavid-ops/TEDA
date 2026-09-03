@@ -361,6 +361,15 @@ def render_sidebar() -> None:
 
         st.divider()
 
+        # Daily report (if available)
+        from agent.reporter import latest_summary_content
+        summary = latest_summary_content()
+        if summary:
+            with st.expander("📝 Rapport du jour", expanded=not market["open"]):
+                st.markdown(summary, unsafe_allow_html=False)
+
+        st.divider()
+
         # Quick commands
         st.caption("**Commandes terminal :")
         st.code("python -m agent.main --live --loop 5 --no-llm", language="bash")

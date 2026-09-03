@@ -340,3 +340,23 @@ def cmd_trade(symbol: str, action: str) -> None:
     print(f"✅ Signal {action} confirmé — placement de l'ordre...")
     _place_paper_order(broker, symbol, signal, risk_amount)
     print("✅ Trade exécuté.")
+
+
+# ---- Daily Report ------------------------------------------------------------
+
+
+def cmd_report() -> None:
+    """Generate the daily trading report (market close summary)."""
+    from agent.reporter import generate_daily_summary
+
+    print("📝 Génération du rapport quotidien...")
+    path = generate_daily_summary()
+    if path:
+        print(f"✅ Rapport sauvegardé : {path}")
+        # Show it
+        from pathlib import Path
+        content = Path(path).read_text(encoding="utf-8")
+        print("\n" + "=" * 60)
+        print(content)
+    else:
+        print("⚠️  Impossible de générer le rapport.")
