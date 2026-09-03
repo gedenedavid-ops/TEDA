@@ -1,0 +1,18 @@
+# Core
+numpy>=1.26
+pandas>=2.1
+
+# Alpaca
+alpaca-py>=0.20
+
+# AI / LLM (Featherless - open-source inference)
+openai>=1.40
+
+# Config
+python-dotenv>=1.0
+
+# Utilities
+requests>=2.31
+
+# Dashboard
+streamlit>=1.57

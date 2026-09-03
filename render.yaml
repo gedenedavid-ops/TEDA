@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: options-alpha-agent
+    env: python
+    region: oregon  # or frankfurt
+    plan: free  # or starter for 24/7 uptime
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run dashboard.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false
+    envVars:
+      - key: ALPACA_API_KEY
+        sync: false
+      - key: ALPACA_SECRET_KEY
+        sync: false
+      - key: FEATHERLESS_API_KEY
+        sync: false

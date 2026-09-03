@@ -1,0 +1,41 @@
+[
+  {
+    "order_id": "f24551fa-5850-4a15-a711-e5c6f6d45d10",
+    "symbol": "MSFT",
+    "signal": "BUY",
+    "stop_loss": 509.5125,
+    "take_profit": 521.1524999999999,
+    "legs": [
+      "MSFT260911C00510000",
+      "MSFT260911C00520000"
+    ],
+    "opened_at": "2026-09-03T14:23:36.467733+00:00",
+    "closed": false
+  },
+  {
+    "order_id": "22d5e654-c9bf-426a-9b00-34b4ee59c1a2",
+    "symbol": "SPY",
+    "signal": "BUY",
+    "stop_loss": 767.226,
+    "take_profit": 774.6949999999999,
+    "legs": [
+      "SPY260910C00768000",
+      "SPY260910C00775000"
+    ],
+    "opened_at": "2026-09-03T14:33:48.990473+00:00",
+    "closed": false
+  },
+  {
+    "order_id": "1380013f-6ddc-449e-b494-6d09502bba9c",
+    "symbol": "QQQ",
+    "signal": "BUY",
+    "stop_loss": 712.737,
+    "take_profit": 724.335,
+    "legs": [
+      "QQQ260910C00714000",
+      "QQQ260910C00724000"
+    ],
+    "opened_at": "2026-09-03T15:04:42.738538+00:00",
+    "closed": false
+  }
+]
