@@ -206,6 +206,20 @@
   - `mcp/alpaca-mcp.json` — configuration prête à l'emploi
   - `mcp/README.md` — guide complet d'installation et d'utilisation
 
+### D23 — Plafonnement qty à 1 (règle du trader)
+- **Décision** : plafonner la quantité de contrats à **1 pour tous les trades**
+  (debit spreads et iron condors), quel que soit le calcul de sizing.
+- **Raison** : le trader (Arlet) a validé cette règle le 3 sept à 21h20 :
+  - Sur un compte $100k, chaque trade risque déjà 1% ($1,000).
+  - Doubler la qty double l'exposition sans améliorer le RR.
+  - NVDA a été exécuté en qty 2 le 3 sept → P&L -$200. Le setup s'est
+    dégradé après l'entrée (perte du FVG), rendant le risque excessif.
+- **Exception** : qty 2 uniquement si les 5 filtres sont exceptionnellement
+  solides ET que le risque total reste dans la limite. Cette exception
+  n'est pas automatisée — elle nécessite une validation manuelle du trader.
+- **Règle complémentaire** : si le setup se dégrade après l'entrée, aucun
+  renforcement automatique.
+
 ---
 
 ## Prochaines décisions (à consigner)

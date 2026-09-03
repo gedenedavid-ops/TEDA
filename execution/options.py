@@ -150,7 +150,9 @@ def build_debit_spread(
         return None
     estimated_debit = round(width * 0.40, 2)   # realistic risk per share
     max_loss_per_contract = estimated_debit * 100
-    qty = max(1, int(risk_amount // max_loss_per_contract))
+    # Trader's rule (3 Sep 2026): cap qty at 1 for all trades on $100k account.
+    # Qty 2 only if filters exceptionally solid + risk stays within limits.
+    qty = 1
 
     legs = [
         OptionLegRequest(
@@ -215,7 +217,8 @@ def build_iron_condor(
     wing = max(put_width, call_width)
     # Iron condor: max loss = wing - credit. Credit ~20% of wing.
     max_loss_per_contract = round(wing * 100 * 0.80, 2)
-    qty = max(1, int(risk_amount // max_loss_per_contract))
+    # Trader's rule (3 Sep 2026): cap qty at 1 for all trades on $100k account.
+    qty = 1
 
     legs = [
         OptionLegRequest(symbol=short_put.symbol, ratio_qty=qty,
