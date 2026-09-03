@@ -142,12 +142,14 @@ def build_debit_spread(
     long_strike = float(long_leg.strike_price)
     short_strike = float(short_leg.strike_price)
 
-    # Debit = cost of long - credit from short (per contract).
-    # Estimate debit as spread width * some factor; actual fill is market.
+    # Debit paid = max loss for a debit spread.
+    # The actual debit is typically 30-50% of the spread width.
+    # We use 40% for risk sizing and 50% as the limit price.
     width = abs(long_strike - short_strike)
     if width == 0:
         return None
-    max_loss_per_contract = width * 100  # worst case, approximate
+    estimated_debit = round(width * 0.40, 2)   # realistic risk per share
+    max_loss_per_contract = estimated_debit * 100
     qty = max(1, int(risk_amount // max_loss_per_contract))
 
     legs = [
@@ -165,7 +167,7 @@ def build_debit_spread(
         ),
     ]
 
-    limit_price = round(width, 2)  # max debit per share we accept
+    limit_price = round(width * 0.50, 2)  # generous limit for fill safety
     return LimitOrderRequest(
         legs=legs,
         limit_price=limit_price,
@@ -210,8 +212,10 @@ def build_iron_condor(
 
     put_width = abs(float(short_put.strike_price) - float(long_put.strike_price))
     call_width = abs(float(short_call.strike_price) - float(long_call.strike_price))
-    widest = max(put_width, call_width) * 100
-    qty = max(1, int(risk_amount // widest))
+    wing = max(put_width, call_width)
+    # Iron condor: max loss = wing - credit. Credit ~20% of wing.
+    max_loss_per_contract = round(wing * 100 * 0.80, 2)
+    qty = max(1, int(risk_amount // max_loss_per_contract))
 
     legs = [
         OptionLegRequest(symbol=short_put.symbol, ratio_qty=qty,
@@ -224,7 +228,7 @@ def build_iron_condor(
                          side=OrderSide.BUY, position_intent=PositionIntent.BUY_TO_OPEN),
     ]
 
-    credit = round(widest, 2)  # min credit per share (accept any)
+    credit = round(wing * 0.20, 2)  # min credit per share we accept
     return LimitOrderRequest(
         legs=legs,
         limit_price=credit,
