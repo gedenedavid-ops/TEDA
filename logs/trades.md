@@ -1335,3 +1335,63 @@
 - **RR** : 7.000000000000039
 - **Confiance** : high
 - **Raison** : HTF bias bullish | zone demand @ 509.75-512.18 | FVG bullish @ 499.96-507.78 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:40:58 UTC — BUY SPY
+- **Action** : REJETÉ (RR insuffisant)
+- **Prix** : 773.01
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 772.59 - 774.53
+- **SL / TP** : 772.3960000000001 / 774.6949999999999
+- **RR** : 0.9750859106530191
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 772.59-774.53 | FVG bullish @ 765.50-766.46 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:40:59 UTC — BUY QQQ
+- **Action** : REJETÉ (RR insuffisant)
+- **Prix** : 717.38
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 715.97 - 719.66
+- **SL / TP** : 715.601 / 724.335
+- **RR** : 2.944896115627741
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 715.97-719.66 | FVG bullish @ 709.69-709.73 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:41:05 UTC — BUY MSFT
+- **Action** : PAPER ORDER (live)
+- **Prix** : 509.64
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 509.75 - 512.18
+- **SL / TP** : 509.5125 / 521.1524999999999
+- **RR** : 7.000000000000039
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 509.75-512.18 | FVG bullish @ 499.96-507.78 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:46:08 UTC — BUY SPY
+- **Action** : REJETÉ (RR insuffisant)
+- **Prix** : 773.14
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 772.59 - 774.53
+- **SL / TP** : 772.3960000000001 / 774.6949999999999
+- **RR** : 0.9750859106530191
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 772.59-774.53 | FVG bullish @ 765.50-766.46 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:46:09 UTC — BUY QQQ
+- **Action** : REJETÉ (RR insuffisant)
+- **Prix** : 717.54
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 715.97 - 719.66
+- **SL / TP** : 715.601 / 724.335
+- **RR** : 2.944896115627741
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 715.97-719.66 | FVG bullish @ 709.69-709.73 | external liquidity swept (clean) | market shift LTF confirmed
+## 2026-09-03 17:46:13 UTC — BUY MSFT
+- **Action** : PAPER ORDER (live)
+- **Prix** : 510.18
+- **Biais** : bullish
+- **Filtres** : {'bias': True, 'zone': True, 'imbalance': True, 'liquidity': True, 'market_shift': True}
+- **Entrée** : 509.75 - 512.18
+- **SL / TP** : 509.5125 / 521.1524999999999
+- **RR** : 7.000000000000039
+- **Confiance** : high
+- **Raison** : HTF bias bullish | zone demand @ 509.75-512.18 | FVG bullish @ 499.96-507.78 | external liquidity swept (clean) | market shift LTF confirmed

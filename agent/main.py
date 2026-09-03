@@ -210,12 +210,31 @@ def _auto_loop(
     interval_min: int = 10,
 ) -> None:
     """Run the agent continuously every `interval_min` minutes."""
+    import json
+    import os
     import time
     from datetime import datetime, timezone
+    from pathlib import Path
 
     print(f"=== Agent SMV — boucle auto toutes les {interval_min} min ===")
     print(f"    Live: {live} | LLM: {use_llm} | Actifs: {len(watchlist)}")
     print(f"    Ctrl+C pour arrêter\n")
+
+    # Status file for dashboard
+    status_file = Path(__file__).resolve().parent.parent / "logs" / "agent_status.json"
+    status_file.parent.mkdir(parents=True, exist_ok=True)
+
+    def _write_status(cycle: int, ts: str) -> None:
+        try:
+            with open(status_file, "w") as f:
+                json.dump({
+                    "running": True,
+                    "pid": os.getpid(),
+                    "last_cycle": cycle,
+                    "last_ts": ts,
+                }, f)
+        except Exception:
+            pass  # never crash on status write
 
     iteration = 0
     while True:
@@ -230,6 +249,7 @@ def _auto_loop(
         except Exception as exc:
             print(f"  [ERREUR] cycle {iteration}: {exc}")
 
+        _write_status(iteration, ts)
         print(f"\n  Prochain cycle dans {interval_min} min...")
         time.sleep(interval_min * 60)
 

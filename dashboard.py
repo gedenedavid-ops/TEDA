@@ -11,11 +11,12 @@ Ou avec port personnalisé :
 from __future__ import annotations
 
 import json
+import os
+import signal
+import subprocess
 import sys
-import threading
 import time
 from datetime import datetime, timezone
-from io import StringIO
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -46,73 +47,81 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ---- Agent background worker --------------------------------------------
+# ---- Agent process (survives page refresh) ------------------------------
 
 
-def _agent_worker(live: bool = True) -> None:
-    """Background thread: runs the agent loop continuously."""
-    import sys
-    from agent.main import run as agent_run
-    from data.market_clock import is_market_open, closed_message
+def _agent_status_file() -> Path:
+    return Path(__file__).resolve().parent / "logs" / "agent_status.json"
 
-    cycle = 0
-    while st.session_state.get("agent_running", False):
-        cycle += 1
-        ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-        header = f"\n=== Cycle #{cycle} — {ts} ===\n"
 
-        try:
-            # Capture stdout to log file
-            old_stdout = sys.stdout
-            sys.stdout = StringIO()
+def _read_agent_status() -> Dict[str, Any]:
+    """Read agent status from disk. Returns defaults if missing."""
+    sf = _agent_status_file()
+    if not sf.exists():
+        return {"running": False, "pid": None, "last_cycle": 0, "last_ts": ""}
+    try:
+        with open(sf, "r") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, IOError):
+        return {"running": False, "pid": None, "last_cycle": 0, "last_ts": ""}
 
-            if is_market_open():
-                agent_run(
-                    watchlist=["SPY", "QQQ", "NVDA", "AAPL", "FXE", "FXB", "FXY", "GLD", "IWM", "MSFT"],
-                    live=live,
-                    use_llm=False,
-                )
-            else:
-                print(closed_message())
 
-            output = sys.stdout.getvalue()
-            sys.stdout = old_stdout
+def _write_agent_status(status: Dict[str, Any]) -> None:
+    """Persist agent status to disk."""
+    sf = _agent_status_file()
+    sf.parent.mkdir(parents=True, exist_ok=True)
+    with open(sf, "w") as f:
+        json.dump(status, f, default=str)
 
-            # Also print to real stdout for terminal
-            print(header + output, flush=True)
 
-            # Append to log file
-            with open(AGENT_LOG, "a", encoding="utf-8") as f:
-                f.write(header + output)
-
-            st.session_state.agent_last_cycle = cycle
-            st.session_state.agent_last_ts = ts
-        except Exception as exc:
-            print(f"[ERREUR AGENT] {exc}", flush=True)
-
-        # Wait 5 minutes between cycles
-        for _ in range(300):  # 5 minutes = 300 seconds
-            if not st.session_state.get("agent_running", False):
-                break
-            time.sleep(1)
+def _is_agent_alive() -> bool:
+    """Check if the agent subprocess is actually running."""
+    status = _read_agent_status()
+    if not status.get("running") or status.get("pid") is None:
+        return False
+    try:
+        os.kill(status["pid"], 0)  # signal 0 = check exists
+        return True
+    except (OSError, ProcessLookupError):
+        return False
 
 
 def start_agent() -> None:
-    """Start the agent in a background thread."""
-    if st.session_state.get("agent_running", False):
+    """Launch the agent as a detached subprocess."""
+    if _is_agent_alive():
         return
-    st.session_state.agent_running = True
-    st.session_state.agent_started_at = datetime.now(timezone.utc).strftime("%H:%M UTC")
-    st.session_state.agent_last_cycle = 0
-    thread = threading.Thread(target=_agent_worker, args=(True,), daemon=True)
-    thread.start()
-    st.session_state.agent_thread = thread
+
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    log_fh = open(AGENT_LOG, "a")
+    project_root = str(Path(__file__).resolve().parent)
+
+    proc = subprocess.Popen(
+        [sys.executable, "-m", "agent.main", "--live", "--loop", "5", "--no-llm"],
+        stdout=log_fh,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,  # detach from Streamlit
+        cwd=project_root,
+    )
+
+    _write_agent_status({
+        "running": True,
+        "pid": proc.pid,
+        "last_cycle": 0,
+        "last_ts": "",
+        "started_at": datetime.now(timezone.utc).strftime("%H:%M UTC"),
+    })
 
 
 def stop_agent() -> None:
-    """Stop the background agent."""
-    st.session_state.agent_running = False
-    st.session_state.agent_last_cycle = 0
+    """Kill the agent subprocess."""
+    status = _read_agent_status()
+    pid = status.get("pid")
+    if pid is not None:
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except (OSError, ProcessLookupError):
+            pass
+    _write_agent_status({"running": False, "pid": None, "last_cycle": 0, "last_ts": ""})
 
 
 # ---- Paths ---------------------------------------------------------------
@@ -335,17 +344,18 @@ def render_sidebar() -> None:
         # Agent controls
         st.subheader("🤖 Agent Trading")
 
-        agent_running = st.session_state.get("agent_running", False)
+        agent_running = _is_agent_alive()
+        status_data = _read_agent_status()
 
         if agent_running:
-            st.success(f"🟢 Agent actif — cycle {st.session_state.get('agent_last_cycle', 0)}")
-            st.caption(f"Démarré : {st.session_state.get('agent_started_at', '?')}")
-            if st.button("⏹️ Arrêter l'agent", type="primary", use_container_width=True):
+            st.success(f"🟢 Agent actif — cycle {status_data.get('last_cycle', 0)}")
+            st.caption(f"Démarré : {status_data.get('started_at', '?')}")
+            if st.button("⏹️ Arrêter l'agent", type="primary", width="stretch"):
                 stop_agent()
                 st.rerun()
         else:
             st.warning("⚪ Agent arrêté")
-            if st.button("▶️ Lancer l'agent", type="primary", use_container_width=True):
+            if st.button("▶️ Lancer l'agent", type="primary", width="stretch"):
                 start_agent()
                 st.rerun()
 
@@ -419,7 +429,7 @@ def render_watchlist() -> None:
         return ""
 
     styled = df.style.map(color_signal, subset=["Signal"])
-    st.dataframe(styled, use_container_width=True, hide_index=True, height=400)
+    st.dataframe(styled, width="stretch", hide_index=True, height=400)
 
     # Counts
     buy_count = sum(1 for s in signals if s["signal"] == "BUY")
