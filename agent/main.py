@@ -72,6 +72,10 @@ def analyze_symbol(broker: BrokerClient, symbol: str) -> Optional[tuple[Signal, 
             signal = condor
             # Inherit bias from structure
             signal.bias = s.bias
+        # else: log that consolidation was checked but didn't fire —
+        # only print reason if we actually did the check (non-NONE zones exist)
+        elif "Range too narrow" in condor.reason or "No clear" in condor.reason:
+            pass  # quiet skip, normal for trending markets
 
     print(
         f"  [{symbol}] biais={s.bias:8s} signal={signal.signal:4s} "

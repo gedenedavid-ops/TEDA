@@ -1,7 +1,7 @@
 # TEDA — Guide d'utilisation
 
 > Manuel rapide : toutes les commandes, ce qu'elles font, et comment lire
-> les résultats. Mis à jour le 2 septembre 2026.
+> les résultats. Mis à jour le 3 septembre 2026.
 
 ---
 
@@ -162,3 +162,27 @@ Quand tu vois `signal=NONE`, la raison te dit quel filtre a bloqué :
 Quand le biais est neutre ET qu'il y a un range clair (support + résistance),
 l'agent émet un signal `IRON_CONDOR` au lieu de `NONE`. Le dashboard affiche
 🟡 IRON CONDOR avec le range détecté.
+
+---
+
+## MCP Server Alpaca
+
+Le MCP Server permet à un assistant IA (Claude, Cursor, VS Code) d'interagir
+directement avec Alpaca via des outils structurés.
+
+```bash
+# Installation
+npm install -g @alpacahq/alpaca-mcp-server
+
+# Variables d'environnement
+export ALPACA_API_KEY="PK..."
+export ALPACA_SECRET_KEY="..."
+export ALPACA_PAPER="true"
+```
+
+**Configuration :** voir `mcp/alpaca-mcp.json` et `mcp/README.md`.
+
+**Utilité :** pendant le développement, le MCP Server a permis à l'IA de :
+- Vérifier les positions en temps réel
+- Consulter la chaîne d'options pour valider les strikes
+- Déboguer les erreurs API sans quitter l'IDE

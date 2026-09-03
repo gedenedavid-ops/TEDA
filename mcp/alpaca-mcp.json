@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "alpaca": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@alpacahq/alpaca-mcp-server"
+      ],
+      "env": {
+        "ALPACA_API_KEY": "${ALPACA_API_KEY}",
+        "ALPACA_SECRET_KEY": "${ALPACA_SECRET_KEY}",
+        "ALPACA_PAPER": "true"
+      }
+    }
+  }
+}

@@ -261,13 +261,13 @@ def evaluate_consolidation(
         return Signal(signal="NONE", bias="neutral",
                       reason="No clear resistance for consolidation range")
 
-    # Range must be wide enough (>= 2% of current price)
+    # Range must be wide enough (>= 1.5% of current price)
     range_pct = (resistance - support) / current_price * 100
-    if range_pct < 2.0:
+    if range_pct < 1.5:
         return Signal(
             signal="NONE", bias="neutral",
             support=support, resistance=resistance,
-            reason=f"Range too narrow ({range_pct:.1f}%, need >= 2%)",
+            reason=f"Range too narrow ({range_pct:.1f}%, need >= 1.5%)",
         )
 
     # Price must be inside the range

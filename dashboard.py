@@ -233,7 +233,7 @@ def fetch_watchlist_signals(symbols: List[str]) -> List[Dict[str, Any]]:
         if signal.signal == "NONE":
             reason_display = signal.reason
         elif signal.signal == "IRON_CONDOR":
-            reason_display = signal.reason
+            reason_display = f"🟡 Iron Condor {signal.support:.1f}–{signal.resistance:.1f} | {signal.reason}"
         else:
             reason_display = "5/5 filtres ✅"
 

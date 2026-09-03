@@ -3,12 +3,12 @@
 Agent de trading autonome basé sur **Alpaca** (paper trading) pour le
 hackathon **Options Alpha Agents** (lablab.ai × Alpaca, Septembre 2026).
 
-**TEDA** adapte la stratégie **SMV (Smart Money Vision)** — une approche
+TEDA adapte la stratégie **SMV (Smart Money Vision)** — une approche
 SMC/ICT/Wyckoff — au marché des **options actions**, en exploitant :
 
 - Le **Trading API** Alpaca (stocks + options)
-- Le **CLI Alpaca** pour les opérations de gestion
-- Le **MCP Server** Alpaca pour l'interaction agent
+- Le **MCP Server** Alpaca pour l'interaction agent (dossier `mcp/`)
+- Le **CLI Alpaca** pour les opérations de gestion (`python -m cli`)
 - Un LLM open-source via **Featherless** pour le raisonnement
 
 ## 🎯 Ce que fait TEDA
@@ -58,6 +58,7 @@ data/           Récupération OHLCV Alpaca (IEX)
 execution/      Client Alpaca + construction de spreads options
 cli/            Commandes CLI Alpaca (account, watchlist, orders)
 config/         Configuration (.env, settings)
+mcp/            MCP Server Alpaca — configuration et guide
 docs/           Documentation complète
 logs/           Positions trackées et statut de l'agent
 ```
@@ -66,11 +67,12 @@ logs/           Positions trackées et statut de l'agent
 
 | Document | Contenu |
 |----------|---------|
-| [Journal des décisions](docs/DECISIONS.md) | Toutes les décisions techniques, datées et justifiées (D01-D21+) |
+| [Journal des décisions](docs/DECISIONS.md) | Toutes les décisions techniques, datées et justifiées (D01-D22) |
 | [Stratégie SMV](docs/STRATEGY.md) | Les règles de trading, la chaîne des 5 filtres |
 | [Architecture](docs/ARCHITECTURE.md) | Vue technique du projet |
 | [Guide des commandes](docs/COMMANDS.md) | Toutes les commandes CLI et leur utilisation |
 | [Déploiement Koyeb](docs/DEPLOY.md) | Guide de déploiement 24/7 |
+| [MCP Server](mcp/README.md) | Configuration et utilisation du MCP Server Alpaca |
 
 ## 🛠️ Technologies
 

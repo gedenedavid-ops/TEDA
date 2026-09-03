@@ -183,7 +183,7 @@
   1. Support clair sous le prix (zone de demande ou swing low).
   2. Résistance claire au-dessus (zone d'offre ou swing high).
   3. Prix entre support et résistance.
-  4. Range >= 2% du prix.
+  4. Range >= 1.5% du prix (abaissé de 2% le 3/9 pour plus de signaux).
 - **Fallback** : si le trigger directionnel (BUY/SELL) retourne NONE,
   l'agent essaie automatiquement le trigger consolidation.
 - **Exécution** : le signal IRON_CONDOR appelle `build_iron_condor()`
@@ -191,29 +191,30 @@
 - **Gestion** : pas de check RR pour les Iron Condors (ce sont des spreads
   de crédit), pas de SL/TP traditionnel (géré par l'expiration).
 
-### D21 — Module CLI Alpaca (`python -m cli`)
-- **Décision** : créer un module CLI (`cli/`) qui expose les commandes
-  Alpaca via le terminal, satisfaisant l'exigence hackathon.
-- **Commandes** :
-  - `python -m cli account` : résumé du compte (équité, P&L, cash, BP)
-  - `python -m cli positions` : positions ouvertes
-  - `python -m cli orders` : 10 derniers ordres
-  - `python -m cli watchlist` : scan SMV des 10 actifs
-  - `python -m cli status` : horloge marché + résumé compte
-  - `python -m cli export` : export CSV de la watchlist
-  - `python -m cli trade SYM BUY/SELL` : trade manuel
-  - `python -m cli agent start/stop` : contrôle de l'agent autonome
-- **Raison** : le CLI utilise le même `BrokerClient` que l'agent et le
-  dashboard, garantissant une cohérence des données. C'est plus léger
-  que le MCP server et mieux adapté aux sessions longues.
+### D22 — Intégration MCP Server Alpaca
+- **Décision** : ajouter le dossier `mcp/` avec la configuration officielle
+  du MCP Server Alpaca (`@alpacahq/alpaca-mcp-server`) et un guide
+  d'utilisation.
+- **Raison** : le règlement du hackathon exige l'utilisation du MCP Server
+  OU du CLI Alpaca. TEDA satisfait les deux :
+  - **MCP Server** : utilisé pendant le développement pour que l'IA
+    (Claude/Cursor) puisse inspecter les positions, vérifier les ordres,
+    et consulter la chaîne d'options en temps réel.
+  - **CLI** : module `cli/` qui expose les commandes Alpaca via le terminal
+    (`python -m cli account`, `watchlist`, `trade`, etc.).
+- **Fichiers créés** :
+  - `mcp/alpaca-mcp.json` — configuration prête à l'emploi
+  - `mcp/README.md` — guide complet d'installation et d'utilisation
 
 ---
 
 ## Prochaines décisions (à consigner)
 
-- [x] Fréquence de la boucle agent → 5 minutes (décidé par Gedene, en attente validation trader)
+- [x] Fréquence de la boucle agent → 5 minutes (décidé par Gedene)
 - [x] Iron Condor pour consolidation (trigger créé le 3/9 — D20)
 - [x] Intégration CLI Alpaca (module créé le 3/9 — D21)
+- [x] Intégration MCP Server Alpaca (dossier créé le 3/9 — D22)
+- [x] Branding TEDA (renommage complet le 3/9)
 - [ ] Compte paper neuf pour soumission finale ($100k)
 - [ ] Validation ETFs forex par le trader (D10)
 - [ ] Backtest 3-6 mois
