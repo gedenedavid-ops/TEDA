@@ -1,192 +1,192 @@
 # TEDA — Slide Deck (10 slides · Hackathon lablab.ai × Alpaca)
 
-> Utilise ce contenu pour créer tes slides sur Canva.
-> Chaque slide indique l'image/screenshot à capturer.
+> Use this content to build your slides on Canva.
+> Each slide specifies which image/screenshot to capture.
 
 ---
 
 ## Slide 1 — Cover
 
-**Titre** : TEDA  
-**Sous-titre** : Options Alpha Agent — Smart Money Vision × Alpaca  
-**Bas de page** : Hackathon lablab.ai × Alpaca · Septembre 2026  
+**Title** : TEDA  
+**Subtitle** : Options Alpha Agent — Smart Money Vision × Alpaca  
+**Footer** : Hackathon lablab.ai × Alpaca · September 2026  
 
-**Image** : Logo TEDA (tu peux utiliser un fond dégradé noir/vert foncé avec le texte en blanc — style terminal/trading). Format épuré, pas d'image.
-
----
-
-## Slide 2 — Le Problème
-
-**Titre** : Pourquoi un agent autonome ?
-
-**Texte** :
-- Le marché options US est complexe — trop de bruit pour un humain seul
-- Les setups techniques apparaissent et disparaissent en minutes
-- La discipline (risk management) est difficile à tenir manuellement
-- Un agent ne dort pas, n'hésite pas, ne dévie pas des règles
-
-**Image** : Screenshot d'un graphique SPY avec beaucoup de bougies (montre le "bruit" du marché). Source : TradingView ou Yahoo Finance.
+**Image** : TEDA logo (use a dark green/black gradient background with white text — terminal/trading style). Clean layout, no image needed.
 
 ---
 
-## Slide 3 — Ce que fait TEDA
+## Slide 2 — The Problem
 
-**Titre** : TEDA en 3 chiffres
+**Title** : Why an autonomous agent?
 
-**Texte** (3 colonnes) :
+**Text** :
+- The US options market is complex — too much noise for a single human
+- Technical setups appear and disappear in minutes
+- Discipline (risk management) is hard to maintain manually
+- An agent never sleeps, never hesitates, never breaks the rules
+
+**Image** : Screenshot of a busy SPY chart with lots of candles (shows market "noise"). Source: TradingView or Yahoo Finance.
+
+---
+
+## Slide 3 — What TEDA Does
+
+**Title** : TEDA in 3 numbers
+
+**Text** (3 columns):
 
 | 🔭 | ⚡ | 🛡️ |
 |---|---|---|
-| **10 actifs** | **5 minutes** | **5 filtres** |
-| surveillés 24/7 | par cycle d'analyse | avant chaque trade |
+| **10 assets** | **5 minutes** | **5 filters** |
+| monitored 24/7 | per analysis cycle | before every trade |
 
-- Scan automatique toutes les 5 minutes
-- Détection des déséquilibres institutionnels (Smart Money)
-- Exécution multi-legs options (debit spreads + iron condors)
-- Sortie automatique SL/TP
+- Automatic scanning every 5 minutes
+- Institutional order flow detection (Smart Money)
+- Multi-leg options execution (debit spreads + iron condors)
+- Automatic SL/TP exit
 
-**Image** : Pas d'image — garder épuré avec les 3 métriques en grand.
-
----
-
-## Slide 4 — La Stratégie SMV (5 filtres)
-
-**Titre** : La chaîne SMV — 5 filtres, aucun compromis
-
-**Texte** (flow de gauche à droite ou de haut en bas) :
-
-```
-① Biais HTF (D1)  →  ② Zone OB (H1)  →  ③ FVG (H1)  →  ④ Liquidité sweepée  →  ⑤ Market Shift LTF  →  ✅ ENTRÉE
-```
-
-| Filtre | Question | Règle |
-|--------|----------|-------|
-| ① Biais | Tendance ? | HH+HL = bullish 80/20 |
-| ② Zone OB | Où agir ? | Zone non mitigée |
-| ③ FVG | Confirmé ? | Imbalance valide la zone |
-| ④ Liquidité | Piège ou safe ? | Sweepée = clean, sinon inducement |
-| ⑤ Shift LTF | Déclencher ? | BOS dans le sens du biais |
-
-**Si 1 filtre manque → NONE (pas de trade).**
-
-**Image** : Un flow diagram simple (flèches entre 5 blocs), ou juste le tableau ci-dessus mis en forme sur Canva avec des couleurs vertes/rouges.
+**Image** : None — keep it clean with the 3 metrics displayed large.
 
 ---
 
-## Slide 5 — Stratégies Options (B/B/B)
+## Slide 4 — The SMV Strategy (5 Filters)
 
-**Titre** : 3 signaux → 3 stratégies options
+**Title** : The SMV Chain — 5 filters, zero compromise
 
-**Texte** :
+**Text** (left-to-right or top-to-bottom flow):
+
+```
+① HTF Bias (D1)  →  ② OB Zone (H1)  →  ③ FVG (H1)  →  ④ Liquidity Swept  →  ⑤ Market Shift LTF  →  ✅ ENTRY
+```
+
+| Filter | Question | Rule |
+|--------|----------|------|
+| ① Bias | Trend? | HH+HL = bullish 80/20 |
+| ② OB Zone | Where to act? | Unmitigated zone |
+| ③ FVG | Confirmed? | Imbalance validates the zone |
+| ④ Liquidity | Trap or safe? | Swept = clean, else inducement |
+| ⑤ Shift LTF | Trigger? | BOS in bias direction |
+
+**If 1 filter fails → NONE (no trade).**
+
+**Image** : A simple flow diagram (arrows between 5 blocks), or the table above styled in Canva with green/red colors.
+
+---
+
+## Slide 5 — Options Strategies (B/B/B)
+
+**Title** : 3 signals → 3 options strategies
+
+**Text** :
 
 ```
 🟢 BUY  →  Call Debit Spread
-           (achat call ATM + vente call OTM)
-           Risque défini, profit capé au spread width
+           (buy ATM call + sell OTM call)
+           Defined risk, profit capped at spread width
 
 🔴 SELL →  Put Debit Spread
-           (achat put ATM + vente put OTM)
-           Même structure, direction baissière
+           (buy ATM put + sell OTM put)
+           Same structure, bearish direction
 
 🟡 NEUTRAL →  Iron Condor
-              (vente put spread + vente call spread)
-              Range trading, crédit encaissé
+              (sell put spread + sell call spread)
+              Range trading, credit collected
 ```
 
-**Image** : Diagrammes P&L simplifiés pour chaque stratégie :
-- Call Debit Spread : courbe qui monte après le strike long
-- Put Debit Spread : courbe qui monte sous le strike long
-- Iron Condor : courbe en "tente" avec profit max au centre
+**Image** : Simplified P&L diagrams for each strategy:
+- Call Debit Spread: curve rising after the long strike
+- Put Debit Spread: curve rising below the long strike
+- Iron Condor: "tent" curve with max profit in the center
 
-Tu peux les faire directement dans Canva avec des formes simples (pas besoin de screenshot).
+Create these directly in Canva with simple shapes (no screenshot needed).
 
 ---
 
-## Slide 6 — Gestion du Risque
+## Slide 6 — Risk Management
 
-**Titre** : Risk Gates — La discipline avant le profit
+**Title** : Risk Gates — Discipline before profit
 
-**Texte** (3 blocs) :
+**Text** (3 blocks):
 
 ```
-🔒 1% max par trade
-   $1,000 sur $100k equity
-   Calculé automatiquement
+🔒 1% max per trade
+   $1,000 on $100k equity
+   Auto-calculated
 
-📐 RR minimum 1:7
-   Trade rejeté si ratio < 7
-   Fallback TP intégré
+📐 Minimum RR 1:7
+   Trade rejected if ratio < 7
+   Fallback TP built-in
 
-🚪 Sortie automatique
-   SL = invalidation technique
-   TP = liquidité ou 1:7
-   Check à chaque cycle (5 min)
+🚪 Automatic exit
+   SL = technical invalidation
+   TP = liquidity target or 1:7
+   Checked every cycle (5 min)
 ```
 
-**Image** : Un dashboard widget montrant le P&L avec une petite perte (-0.13% sur le screenshot du 3 sept). Capture le widget équité du dashboard TEDA.
+**Image** : Dashboard widget showing P&L with a small loss (-0.13% on the Sep 3 screenshot). Capture the equity widget from the TEDA dashboard.
 
 ---
 
-## Slide 7 — Infrastructure Alpaca
+## Slide 7 — Alpaca Infrastructure
 
-**Titre** : Stack Alpaca — 3 briques
+**Title** : Alpaca Stack — 3 building blocks
 
-**Texte** (3 colonnes) :
+**Text** (3 columns):
 
 | 📡 Trading API | 🔌 MCP Server | ⌨️ CLI |
 |---|---|---|
-| Données OHLCV IEX | IA connectée à Alpaca | Commandes terminal |
-| Ordres MLEG options | Positions en temps réel | `python -m cli account` |
-| Paper trading $100k | Débug API sans IDE | `python -m cli watchlist` |
+| IEX OHLCV data | AI connected to Alpaca | Terminal commands |
+| MLEG options orders | Real-time positions | `python -m cli account` |
+| Paper trading $100k | API debug without IDE | `python -m cli watchlist` |
 
-+ **Featherless** : LLM open-source (Llama 3.1 8B) pour le raisonnement  
-+ **Koyeb** : Déploiement 24/7, auto-deploy depuis GitHub  
-+ **Streamlit** : Dashboard interactif 4 onglets
++ **Featherless** : Open-source LLM (Llama 3.1 8B) for reasoning  
++ **Koyeb** : 24/7 deployment, auto-deploy from GitHub  
++ **Streamlit** : Interactive 4-tab dashboard
 
-**Image** : Diagramme d'architecture simple :
+**Image** : Simple architecture diagram:
 ```
-[Alpaca API] ←→ [Agent TEDA] ←→ [Featherless LLM]
+[Alpaca API] ←→ [TEDA Agent] ←→ [Featherless LLM]
                     ↓
-              [Dashboard Streamlit] → [Koyeb 24/7]
+              [Streamlit Dashboard] → [Koyeb 24/7]
 ```
 
-Fais-le dans Canva avec des boîtes et des flèches.
+Create this in Canva with boxes and arrows.
 
 ---
 
-## Slide 8 — Dashboard Live
+## Slide 8 — Live Dashboard
 
-**Titre** : Monitoring 24/7
+**Title** : 24/7 Monitoring
 
-**Image** : **Screenshot complet du dashboard TEDA** (l'écran Streamlit avec les 4 onglets visibles, idéalement l'onglet Watchlist avec les signaux). 
+**Image** : **Full screenshot of the TEDA dashboard** (Streamlit screen with all 4 tabs visible, ideally the Watchlist tab with live signals).
 
-Capture à faire quand le marché est ouvert pour avoir des données live.
+Capture when the market is open for live data.
 
-**Mini-texte** en bas du slide : Dashboard Streamlit hébergé sur Koyeb — rafraîchissement auto 60s.
+**Small text** at bottom: Streamlit Dashboard hosted on Koyeb — auto-refresh every 60s.
 
 ---
 
-## Slide 9 — Résultats Live
+## Slide 9 — Live Results
 
-**Titre** : Premiers trades — 3 septembre 2026
+**Title** : First trades — September 3, 2026
 
-**Texte** :
+**Text** :
 
-| Actif | Signal | Stratégie | RR | Statut |
-|-------|--------|-----------|-----|--------|
-| MSFT | BUY | Call Debit Spread 510/520 | 7.0 | ✅ Ouvert |
-| SPY | BUY | Call Debit Spread 768/775 | 7.35 | ✅ Ouvert |
-| QQQ | BUY | Call Debit Spread 714/724 | 3.3 | Ouvert (manuel) |
+| Asset | Signal | Strategy | RR | Status |
+|-------|--------|----------|-----|--------|
+| MSFT | BUY | Call Debit Spread 510/520 | 7.0 | ✅ Open |
+| SPY | BUY | Call Debit Spread 768/775 | 7.35 | ✅ Open |
+| QQQ | BUY | Call Debit Spread 714/724 | 3.3 | Open (manual) |
 
-**Image** : Screenshot du terminal montrant les ordres soumis avec les IDs. Ou screenshot de l'onglet Positions du dashboard TEDA.
+**Image** : Terminal screenshot showing submitted orders with IDs. Or the Positions tab from the TEDA dashboard.
 
 ---
 
 ## Slide 10 — Tech Stack & Thank You
 
-**Titre** : TEDA — Stack technique
+**Title** : TEDA — Tech Stack
 
-**Texte** (logos ou texte) :
+**Text** (logos or text):
 
 ```
 🐍 Python 3.14    📊 pandas/numpy    🦙 alpaca-py
@@ -194,24 +194,24 @@ Capture à faire quand le marché est ouvert pour avoir des données live.
 📈 Streamlit       ☁️ Koyeb (24/7)    🔒 Paper Trading
 ```
 
-**Liens** :
+**Links** :
 - GitHub : `github.com/gedenedavid-ops/trade`
-- Dashboard : `[URL Koyeb]`
+- Dashboard : `[Koyeb URL]`
 
-**Bas de page** : Merci — Questions ?  
-Hackathon lablab.ai × Alpaca · Septembre 2026
+**Footer** : Thank you — Questions?  
+Hackathon lablab.ai × Alpaca · September 2026
 
-**Image** : Aucune. Juste les logos/icônes des technos.
+**Image** : None. Just tech logos/icons.
 
 ---
 
-## Récapitulatif des images à capturer
+## Image Capture Checklist
 
-| Slide | Image à capturer | Source |
+| Slide | Image to capture | Source |
 |-------|-----------------|--------|
-| 2 | Graphique SPY chargé (bougies) | TradingView / Yahoo Finance |
-| 6 | Widget P&L du dashboard | Dashboard TEDA |
-| 7 | Diagramme architecture | À créer dans Canva (boîtes + flèches) |
-| 8 | Screenshot complet du dashboard | Dashboard TEDA (marché ouvert) |
-| 9 | Onglet Positions ou log terminal | Dashboard TEDA ou terminal |
-| 1, 3, 4, 5, 10 | Aucune image (design Canva uniquement) | — |
+| 2 | Busy SPY chart (candles) | TradingView / Yahoo Finance |
+| 6 | P&L widget from dashboard | TEDA Dashboard |
+| 7 | Architecture diagram | Create in Canva (boxes + arrows) |
+| 8 | Full dashboard screenshot | TEDA Dashboard (market open) |
+| 9 | Positions tab or terminal log | TEDA Dashboard or terminal |
+| 1, 3, 4, 5, 10 | No image (Canva design only) | — |
