@@ -76,14 +76,17 @@ def _collect_positions_state() -> str:
             lines.append(
                 f"- {p.get('symbol')} {p.get('signal')} | "
                 f"SL={p.get('stop_loss')} TP={p.get('take_profit')} | "
-                f"order={p.get('order_id', '?')[:8]}..."
+                f"order={str(p.get('order_id', '?'))[:8]}..."
             )
     if closed_pos:
         lines.append("**Positions fermées aujourd'hui:**")
         for p in closed_pos:
+            reason = p.get('exit_reason', p.get('status', 'closed'))
+            closed_ts = p.get('closed_at', '')
+            if closed_ts:
+                reason += f" @ {str(closed_ts)[:19]}"
             lines.append(
-                f"- {p.get('symbol')} {p.get('signal')} | "
-                f"closed={p.get('closed_at', '?')}"
+                f"- {p.get('symbol')} {p.get('signal')} | {reason}"
             )
 
     if not lines:
@@ -245,7 +248,14 @@ def generate_daily_summary(account_summary: str = "") -> str:
                 temperature=0.4,
                 max_tokens=1200,
             )
-            summary = resp.choices[0].message.content.strip()
+            if resp and resp.choices and len(resp.choices) > 0:
+                choice = resp.choices[0]
+                if choice.message and choice.message.content:
+                    summary = choice.message.content.strip()
+                else:
+                    raise ValueError("LLM response has empty message content")
+            else:
+                raise ValueError("LLM response has no choices")
         except Exception as exc:
             summary = _fallback_summary(trades, positions, watchlist, account_summary, today_str)
             summary += f"\n\n*Note: LLM unavailable ({exc}), fallback summary generated.*"
