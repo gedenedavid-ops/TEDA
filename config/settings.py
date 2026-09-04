@@ -44,6 +44,9 @@ class Settings:
     default_dte_min: int = 7
     default_dte_max: int = 45
 
+    # Dashboard security
+    dashboard_secret: str = ""  # if set, required to start/stop agent from dashboard
+
     @classmethod
     def from_env(cls) -> "Settings":
         return cls(
@@ -56,6 +59,7 @@ class Settings:
             featherless_model=os.getenv(
                 "FEATHERLESS_MODEL", "Qwen/Qwen2.5-7B-Instruct"
             ),
+            dashboard_secret=os.getenv("DASHBOARD_SECRET", ""),
         )
 
     @property
@@ -65,6 +69,11 @@ class Settings:
     @property
     def featherless_configured(self) -> bool:
         return bool(self.featherless_api_key)
+
+    @property
+    def dashboard_protected(self) -> bool:
+        """True if a dashboard secret is set (start/stop requires code)."""
+        return bool(self.dashboard_secret)
 
 
 settings = Settings.from_env()

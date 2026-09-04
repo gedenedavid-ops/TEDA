@@ -347,17 +347,46 @@ def render_sidebar() -> None:
         agent_running = _is_agent_alive()
         status_data = _read_agent_status()
 
-        if agent_running:
-            st.success(f"🟢 Agent actif — cycle {status_data.get('last_cycle', 0)}")
-            st.caption(f"Démarré : {status_data.get('started_at', '?')}")
-            if st.button("⏹️ Arrêter l'agent", type="primary", width="stretch"):
-                stop_agent()
-                st.rerun()
+        # ---- Dashboard secret gate ----
+        from config.settings import settings
+
+        authenticated = False
+        if settings.dashboard_protected:
+            # Initialize session state
+            if "agent_authenticated" not in st.session_state:
+                st.session_state.agent_authenticated = False
+
+            if not st.session_state.agent_authenticated:
+                code = st.text_input(
+                    "🔐 Code secret",
+                    type="password",
+                    placeholder="Entrez le code pour contrôler l'agent",
+                    key="agent_secret_input",
+                )
+                if code:
+                    if code == settings.dashboard_secret:
+                        st.session_state.agent_authenticated = True
+                        st.success("✅ Accès autorisé")
+                        st.rerun()
+                    else:
+                        st.error("❌ Code incorrect")
+            else:
+                authenticated = True
         else:
-            st.warning("⚪ Agent arrêté")
-            if st.button("▶️ Lancer l'agent", type="primary", width="stretch"):
-                start_agent()
-                st.rerun()
+            authenticated = True  # no secret set → anyone can control
+
+        if authenticated:
+            if agent_running:
+                st.success(f"🟢 Agent actif — cycle {status_data.get('last_cycle', 0)}")
+                st.caption(f"Démarré : {status_data.get('started_at', '?')}")
+                if st.button("⏹️ Arrêter l'agent", type="primary", width="stretch"):
+                    stop_agent()
+                    st.rerun()
+            else:
+                st.warning("⚪ Agent arrêté")
+                if st.button("▶️ Lancer l'agent", type="primary", width="stretch"):
+                    start_agent()
+                    st.rerun()
 
         st.divider()
 
